@@ -33,17 +33,17 @@ user_df = user_df[
     (user_df['processing_time_s'] <= 3600)
 ]
 
-# Group by year-month and compute average processing time
+# Group by year-month and compute median processing time
 user_df['year_month'] = user_df['inserted_at_dt'].dt.to_period('M')
-monthly_avg = user_df.groupby('year_month')['processing_time_s'].mean().reset_index()
-monthly_avg['year_month_dt'] = monthly_avg['year_month'].dt.to_timestamp()
+monthly_median = user_df.groupby('year_month')['processing_time_s'].median().reset_index()
+monthly_median['year_month_dt'] = monthly_median['year_month'].dt.to_timestamp()
 
 # Plot
 fig, ax = plt.subplots(figsize=(12, 6))
 
 ax.plot(
-    monthly_avg['year_month_dt'],
-    monthly_avg['processing_time_s'],
+    monthly_median['year_month_dt'],
+    monthly_median['processing_time_s'],
     marker='o',
     linewidth=2,
     markersize=6,
@@ -53,7 +53,7 @@ ax.plot(
 )
 
 # Annotate each point with its value
-for _, row in monthly_avg.iterrows():
+for _, row in monthly_median.iterrows():
     ax.annotate(
         f"{row['processing_time_s']:.1f}s",
         (row['year_month_dt'], row['processing_time_s']),
@@ -64,9 +64,9 @@ for _, row in monthly_avg.iterrows():
         color='#444',
     )
 
-ax.set_title('Monthly Mean User Prompt Processing Time', fontsize=15, fontweight='bold', pad=15)
+ax.set_title('Monthly Median User Prompt Processing Time', fontsize=15, fontweight='bold', pad=15)
 ax.set_xlabel('Month', fontsize=11)
-ax.set_ylabel('Mean Processing Time (seconds)', fontsize=11)
+ax.set_ylabel('Median Processing Time (seconds)', fontsize=11)
 ax.yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, _: f'{x:.0f}s'))
 ax.xaxis.set_major_formatter(plt.matplotlib.dates.DateFormatter('%b %Y'))
 plt.xticks(rotation=45, ha='right')
@@ -75,9 +75,9 @@ ax.set_ylim(bottom=0)
 ax.spines[['top', 'right']].set_visible(False)
 
 plt.tight_layout()
-out_path = Path(r"C:\openfn\assistant-analytics\charts") / "monthly_response_time.png"
+out_path = Path(r"C:\openfn\assistant-analytics\charts") / "median_monthly_response_time.png"
 out_path.parent.mkdir(exist_ok=True)
 plt.savefig(out_path, dpi=150, bbox_inches='tight')
 print(f"Chart saved to {out_path}")
-print("\nMonthly means:")
-print(monthly_avg[['year_month', 'processing_time_s']].to_string(index=False))
+print("\nMonthly medians:")
+print(monthly_median[['year_month', 'processing_time_s']].to_string(index=False))
