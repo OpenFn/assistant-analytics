@@ -65,7 +65,12 @@ To run it:
 pip install networkx
 python C:\openfn\assistant-analytics\adaptors_network_graph_viz.py
 If you write a specific adaptor name after the program name when you run it, then it will produce a network graph that only shows nodes and edges connected to that specific adaptor, e.g.
-python C:\openfn\assistant-analytics\adaptors_network_graph_viz.py http will produce a chart called adaptors_used_network_graph_viz_http.png that shows only how the http adaptor is used in combination with other adaptors.
+"python C:\openfn\assistant-analytics\adaptors_network_graph_viz.py http" will produce a chart called adaptors_used_network_graph_viz_http.png that shows only how the http adaptor is used in combination with other adaptors.
+
+comprehensive_tone_analysis_viz.py
+This makes a bunch of percentage bar graps that display answers to a bunch of different questions about the actual content of the prompts like their tone, writing style, if claude thought that the problem was actually resolved, if the user sounded frustrated, if the session sounded like it was intended for building or debugging etc. These are all subjective questions but it's nice to have some sort of automated insight into them. Take the results for language? with a pinch of salt, it's not easy to confidently identify a language based on short prompts, and there is no dedicated list of supported languages for OpenFN's assistant. Takes C:\openfn\assistant-analytics\data\anthropic_api_session_parsed_analysis as the input and outputs to C:\openfn\assistant-analytics\charts\comprehensive_tone_analysis_viz.py
+
+
 
 
 

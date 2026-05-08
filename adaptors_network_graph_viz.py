@@ -111,6 +111,16 @@ title = (
     "Adaptor Co-usage Network\n(node size = sessions used in,  edge thickness = times used together)"
 )
 ax.set_title(title, fontsize=14, fontweight="bold", pad=16)
+
+if FOCUS:
+    total_sessions = len(df)
+    focus_sessions = node_counts.get(FOCUS, 0)
+    ax.text(
+        0.01, 0.01,
+        f"'{FOCUS}' appeared in {focus_sessions:,} of {total_sessions:,} total sessions ({focus_sessions / total_sessions * 100:.1f}%)",
+        transform=ax.transAxes, fontsize=9, color="#555555",
+        va="bottom", ha="left",
+    )
 ax.axis("off")
 
 plt.tight_layout()
