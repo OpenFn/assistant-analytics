@@ -11,9 +11,9 @@ This creates a visualisation that shows the monthly message volume, the core sys
 
 #### heuristic-response-time-v-lang-used.py
 This one doesn't work that well because it's just heuristically using python to detect languages. To get it to run use:
-pip install langdetect langcodes
+`pip install langdetect langcodes`
 then:
-pip install language_data
+`pip install language_data`
 The output is *heuristic_response_time_vs_language_used.png* 
 
 #### broken-code-string-state.py
