@@ -79,8 +79,7 @@ This makes a bunch of percentage bar graps that display answers to a bunch of di
 Potentially a quite interesting one that shows how the average response time varies by adaptor used. Response time is calculated by averaging the difference between input_at and processing_completed_at for all the prompts in a session (ignoring any that are missing one or both of those values, which is a lot), and then averaging that to give the mean response time for each session. Then this script looks at *anthropic_api_session_parsed_analysis.csv* to see which sessions contain both data in the mean_response_time and adaptors_mentioned_in_user_prompt_specifically columns, and produces a bar graph that shows the mean average mean_response_time for each adaptor with interquartile range error bars. I.e it first takes the mean response time within a session, and then takes a mean again between sessions. Outputs *response_time_v_adaptor_viz.png* 
 
 #### session-length-v-adaptor-viz.py
-This is probably less useful, it shows how the length of a chat session varies by the adaptor used. The length of a session is calculated as the difference between the earliest input_at and the latest processing_completed_at time data within each session. Outputs *session-length-v-adaptor-viz.png*
-
+This is probably less useful, it shows how the length of a chat session varies by the adaptor used. The length of a session is calculated as the difference between the earliest input_at and the latest processing_completed_at time data within each session. Input is *anthropic_api_session_parsed_analysis.csv* and output is *session-length-v-adaptor-viz.png*
 
 
 
