@@ -75,66 +75,14 @@ If you write a specific adaptor name after the program name when you run it, the
 #### comprehensive_tone_analysis_viz.py
 This makes a bunch of percentage bar graps that display answers to a bunch of different questions about the actual content of the prompts like their tone, writing style, if claude thought that the problem was actually resolved, if the user sounded frustrated, if the session sounded like it was intended for building or debugging etc. These are all subjective questions but it's nice to have some sort of automated insight into them. Take the results for language? with a pinch of salt, it's not easy to confidently identify a language based on short prompts, and there is no dedicated list of supported languages for OpenFN's assistant. Takes *C:\openfn\assistant-analytics\data\anthropic_api_session_parsed_analysis.csv* as the input and outputs to *C:\openfn\assistant-analytics\charts\comprehensive_tone_analysis_viz.py*
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #### response-time-v-adaptor-viz.py
 Potentially a quite interesting one that shows how the average response time varies by adaptor used. Response time is calculated by averaging the difference between input_at and processing_completed_at for all the prompts in a session (ignoring any that are missing one or both of those values, which is a lot), and then averaging that to give the mean response time for each session. Then this script looks at *anthropic_api_session_parsed_analysis.csv* to see which sessions contain both data in the mean_response_time and adaptors_mentioned_in_user_prompt_specifically columns, and produces a bar graph that shows the mean average mean_response_time for each adaptor with interquartile range error bars. I.e it first takes the mean response time within a session, and then takes a mean again between sessions. Outputs *response_time_v_adaptor_viz.png* 
 
 #### session-length-v-adaptor-viz.py
 This is probably less useful, it shows how the length of a chat session varies by the adaptor used. The length of a session is calculated as the difference between the earliest input_at and the latest processing_completed_at time data within each session. Input is *anthropic_api_session_parsed_analysis.csv* and output is *session-length-v-adaptor-viz.png*
 
-
+####response-time-v-sequential-prompts-in-session.py
+This is an interesting one. It calculates the response times of each user prompt within each session, and then looks across all sessions and calculates the median response time for sequential prompts i.e 1st prompt, 2nd prompt, 3rd etc, and then displays that in a line graph with interquartile range error bars. The n= number above each data point is the number of prompts that have that sequential number, e.g. n=1 at 25 on the x axis means there was only one session that had 25 prompts and the y axis value is the response time for that prompt. This is the only program that takes *C:\openfn\assistant-analytics\data\session_parsed* as the input, it looks at the whole folder of those indiviudal session parsed files. It outputs *response-time-v-sequential-prompts-in-session.png*
 
 
 
