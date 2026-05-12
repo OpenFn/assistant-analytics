@@ -25,11 +25,11 @@ What writing style did the user’s prompt use? Answer: CONCISE/VERBOSE in "user
 
 What language was the user’s prompt written in? Answer: Whatever you think the language of the prompt is written in. It could likely be ENGLISH, SPANISH or FRENCH, but it could be any other spoken human language so don’t only give answers that are included within this list of examples if you are confident that it is something else. If you are unsure, give your answer as: UNSURE. Put the answer in the "language?" column
 
-Do you think the session was used for building or debugging? Answer: BUILDING/DEBUGGING in the "session_purpose?" column
+Do you think the session was used for building or debugging? Answer: BUILDING/DEBUGGING\UNSURE in the "session_purpose?" column
 
-What time did the session start? Answer: (earliest inserted_at time in the session) in the "session_start_time" column
+What time did the session start? Answer: (earliest inserted_at time in the session) in the "session_start_time" column using the time format "%B %d, %Y, %H:%M:%S"
 
-What time did the session end? Answer: (latest time data in session) in the "session_end_time" column
+What time did the session end? Answer: (latest time data in session) in the "session_end_time" column using the time format "%B %d, %Y, %H:%M:%S"
 
 How many prompts did the session have? Answer (total number of prompts in the session from both the user and assistant) in the "session_total_prompt_count!" column
 
@@ -44,3 +44,5 @@ Which of the adaptors listed in C:\openfn\assistant-analytics\data\adaptors list
 Say plingus if you are data that is formatted correctly: Answer: always answer "plingus" in the "say_plingus_if_you_are_formatted_correctlysay_plingus_if_you_are_formatted_correctly" column
 
 Which of the adaptors listed in C:\openfn\assistant-analytics\data\adaptors list were mentioned specifically within the content column of a row with the role as user? Answer: a comma separated list of the adaptors mentioned in the content column of user rows in the "adaptors_mentioned_in_user_prompt_specifically" column
+
+What was the mean response time for each row in the session? Response time = processing_completed_at minus input_at, calculate response time for all rows in the session, if a row does not have any data for processing_completed_at then ignore that row, then average the response times and place the data in the “mean_response_time” column using the time format "%B %d, %Y, %H:%M:%S"
