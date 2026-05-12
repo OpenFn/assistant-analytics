@@ -81,7 +81,7 @@ Potentially a quite interesting one that shows how the average response time var
 #### session-length-v-adaptor-viz.py
 This is probably less useful, it shows how the length of a chat session varies by the adaptor used. The length of a session is calculated as the difference between the earliest input_at and the latest processing_completed_at time data within each session. Input is *anthropic_api_session_parsed_analysis.csv* and output is *session-length-v-adaptor-viz.png*
 
-####response-time-v-sequential-prompts-in-session.py
+#### response-time-v-sequential-prompts-in-session.py
 This is an interesting one. It calculates the response times of each user prompt within each session, and then looks across all sessions and calculates the median response time for sequential prompts i.e 1st prompt, 2nd prompt, 3rd etc, and then displays that in a line graph with interquartile range error bars. The n= number above each data point is the number of prompts that have that sequential number, e.g. n=1 at 25 on the x axis means there was only one session that had 25 prompts and the y axis value is the response time for that prompt. This is the only program that takes *C:\openfn\assistant-analytics\data\session_parsed* as the input, it looks at the whole folder of those indiviudal session parsed files. It outputs *response-time-v-sequential-prompts-in-session.png*
 
 
