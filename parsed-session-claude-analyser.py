@@ -39,7 +39,7 @@ def _sort_key(p):
     except ValueError:
         return 0
 
-session_files = sorted(INPUT_DIR.glob("*.csv"), key=_sort_key)
+session_files = sorted(INPUT_DIR.glob("*.csv"), key=_sort_key, reverse=True)
 total = len(session_files)
 print(f"Found {total} session files in {INPUT_DIR}")
 
